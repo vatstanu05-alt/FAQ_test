@@ -65,7 +65,7 @@ npm install
 ```bash
 cp .env.example .env
 # Open .env and paste your Groq API key
-# Get one free (no credit card) at: https://console.groq.com
+# Get one at: https://console.groq.com
 ```
 
 ### 4. Start the dev server
@@ -177,7 +177,7 @@ Then point your domain DNS to the server IP and use Nginx as a reverse proxy on 
 
 | Variable | Required | Default | Description |
 |---|---|---|---|
-| `GROQ_API_KEY` | ✅ | — | Your Groq API key — get one free at [console.groq.com](https://console.groq.com) |
+| `GROQ_API_KEY` | — | Your Groq API key — get one free at [console.groq.com](https://console.groq.com) |
 | `PORT` | No | `3000` | Port the server listens on |
 | `ALLOWED_ORIGIN` | No | `*` | CORS origin whitelist (set to your domain in production) |
 
