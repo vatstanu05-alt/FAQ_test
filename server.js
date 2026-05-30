@@ -45,7 +45,7 @@ app.post('/api/chat', rateLimit, async (req, res) => {
     return res.status(400).json({ error: 'messages array is required.' });
   }
 
-  const apiKey = const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     console.error('ANTHROPIC_API_KEY is not set.');
     return res.status(500).json({ error: 'Server is not configured. Set ANTHROPIC_API_KEY.' });
