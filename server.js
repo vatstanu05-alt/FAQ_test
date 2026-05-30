@@ -1,6 +1,6 @@
 /**
  * FAQ Backend Server
- * Proxies Claude API calls so the API key stays server-side.
+ * Proxies Groq API calls so the API key stays server-side.
  * Node >= 18 required (uses built-in fetch).
  */
 
@@ -47,38 +47,41 @@ app.post('/api/chat', rateLimit, async (req, res) => {
 
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    console.error('ANTHROPIC_API_KEY is not set.');
-    return res.status(500).json({ error: 'Server is not configured. Set ANTHROPIC_API_KEY.' });
+    console.error('GROQ_API_KEY is not set.');
+    return res.status(500).json({ error: 'Server is not configured. Set GROQ_API_KEY.' });
   }
 
   try {
+    const history = messages.slice(-10);
+    const groqMessages = [
+      { role: 'system', content: system || 'You are a helpful FAQ assistant.' }
+    ].concat(history);
+
     const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`,
-  },
-  body: JSON.stringify({
-    model: 'llama-3.3-70b-versatile',
-    max_tokens: 1000,
-    messages: [
-      { role: 'system', content: system || 'You are a helpful FAQ assistant.' },
-      ...messages.slice(-10)
-    ],
-  }),
-});
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + apiKey,
+      },
+      body: JSON.stringify({
+        model:      'llama-3.3-70b-versatile',
+        max_tokens: 1000,
+        messages:   groqMessages,
+      }),
+    });
 
-const data = await upstream.json();
+    const data = await upstream.json();
 
-if (!upstream.ok) {
-  console.error('Groq error:', data);
-  return res.status(upstream.status).json({
-    error: data?.error?.message || 'Upstream API error.',
-  });
-}
+    if (!upstream.ok) {
+      console.error('Groq error:', data);
+      return res.status(upstream.status).json({
+        error: data && data.error ? data.error.message : 'Upstream API error.',
+      });
+    }
 
-const reply = data.choices[0].message.content.trim();
+    const reply = data.choices[0].message.content.trim();
     res.json({ reply });
+
   } catch (err) {
     console.error('Server error:', err);
     res.status(500).json({ error: 'Internal server error.' });
@@ -90,7 +93,7 @@ app.get('/api/health', (_req, res) => {
   res.json({
     status:    'ok',
     version:   '1.0.0',
-    hasApiKey: !!process.env.ANTHROPIC_API_KEY,
+    hasApiKey: !!process.env.GROQ_API_KEY,
     timestamp: new Date().toISOString(),
   });
 });
@@ -101,6 +104,6 @@ app.get('*', (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`\n✓ FAQ server → http://localhost:${PORT}`);
-  console.log(`  API key : ${process.env.ANTHROPIC_API_KEY ? '✓ configured' : '✗ MISSING — set ANTHROPIC_API_KEY'}\n`);
+  console.log('\n✓ FAQ server → http://localhost:' + PORT);
+  console.log('  API key : ' + (process.env.GROQ_API_KEY ? '✓ configured' : '✗ MISSING — set GROQ_API_KEY') + '\n');
 });
