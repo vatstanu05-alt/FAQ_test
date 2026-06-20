@@ -4,7 +4,7 @@ A clean, fully-featured FAQ web app with a built-in AI chatbot powered by [Groq]
 
 ---
 
-## Features
+## Features 
 
 - **Structured FAQ** — Numbered sections and questions with anchor links, a sticky sidebar table of contents, and scroll-spy highlighting
 - **Live search** — Instant keyword filtering with match highlighting across all questions and answers
