@@ -39,7 +39,9 @@ faq-project/
 ├── .env.example       ← Copy to .env and add your API key
 ├── .gitignore
 ├── public/
-│   └── index.html     ← The FAQ page (edit FAQ content here)
+│   └── index.html
+        dashboard.html
+        apply.html    ← The FAQ page (edit FAQ content here)
 └── README.md
 ```
 
