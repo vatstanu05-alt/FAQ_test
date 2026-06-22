@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply Now</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f7fb;
+  padding:40px;
+}
+
+.container{
+  max-width:700px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:#666;
+  margin-bottom:25px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:bold;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
+
+textarea{
+  resize:vertical;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.success{
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  background:#dcfce7;
+  color:#166534;
+  border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Summer Internship Application</h1>
+<p class="subtitle">
+Fill out the form below to apply.
+</p>
+
+<form id="applicationForm">
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" required>
+</div>
+
+<div class="form-group">
+<label>Email Address</label>
+<input type="email" required>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input type="tel" required>
+</div>
+
+<div class="form-group">
+<label>College / University</label>
+<input type="text" required>
+</div>
+
+<div class="form-group">
+<label>Degree</label>
+<input type="text" placeholder="B.Tech, B.Sc, M.Tech..." required>
+</div>
+
+<div class="form-group">
+<label>Current Year</label>
+<select required>
+<option value="">Select Year</option>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+<option>Graduate</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Domain of Interest</label>
+<select required>
+<option value="">Select Domain</option>
+<option>Web Development</option>
+<option>Machine Learning</option>
+<option>Cybersecurity</option>
+<option>Data Science</option>
+<option>Research</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Why do you want to join?</label>
+<textarea rows="4" required></textarea>
+</div>
+
+<button type="submit">Submit Application</button>
+
+</form>
+
+<div class="success" id="successBox">
+✅ Application submitted successfully.
+Our team will contact you via email.
+</div>
+
+</div>
+
+<script>
+document.getElementById("applicationForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+document.getElementById("successBox").style.display="block";
+
+this.reset();
+});
+</script>
+
+</body>
+</html>
