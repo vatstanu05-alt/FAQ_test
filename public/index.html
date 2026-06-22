@@ -937,7 +937,7 @@ function initChat() {
   const input   = document.getElementById('chat-input');
   const sendBtn = document.getElementById('chat-send');
   const chipsEl = document.getElementById('chat-chips');
-
+  const chatHistory = [];
   addBotMsg('👋 Hi! Ask me anything about the programme — I answer from this FAQ and will point you to the exact section.');
 
   CHIPS.forEach(c => {
