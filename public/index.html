@@ -605,6 +605,10 @@ const FAQ = [
 ];
 const CHIPS = ['How do I apply?','When does it start?','What is a NOC?','Will I get a certificate?','What does termination mean?','Who can be my mentor?'];
 
+let chatHistory = [];
+// Maps "1.1" → "q11", "1" → "s1" etc. for link injection
+let sectionMap  = {};
+
 // ═══════════════════════════════════════════════
 //  BOOTSTRAP
 // ═══════════════════════════════════════════════
@@ -907,9 +911,6 @@ function showThanks(id, vote) {
 // ═══════════════════════════════════════════════
 //  CHAT (FIX Issue 9: bot references FAQ anchors)
 // ═══════════════════════════════════════════════
-let chatHistory = [];
-// Maps "1.1" → "q11", "1" → "s1" etc. for link injection
-let sectionMap  = {};
 
 function buildSectionMap() {
   FAQ.forEach(sec => {
